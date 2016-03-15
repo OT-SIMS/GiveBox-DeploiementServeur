@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="UtilisateurSet" EntityType="Model.Store.UtilisateurSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OffreSet" EntityType="Model.Store.OffreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategorieSet" EntityType="Model.Store.CategorieSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FichierSet" EntityType="Model.Store.FichierSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FichierTypeSet" EntityType="Model.Store.FichierTypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DiscussionSet" EntityType="Model.Store.DiscussionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NotificationSet" EntityType="Model.Store.NotificationSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UtilisateurOffre" Association="Model.Store.UtilisateurOffre">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Offre" EntitySet="OffreSet" />
+    </AssociationSet>
+    <AssociationSet Name="OffreFichier" Association="Model.Store.OffreFichier">
+      <End Role="Offre" EntitySet="OffreSet" />
+      <End Role="Fichier" EntitySet="FichierSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategorieCategorie" Association="Model.Store.CategorieCategorie">
+      <End Role="Categorie" EntitySet="CategorieSet" />
+      <End Role="Categorie1" EntitySet="CategorieSet" />
+    </AssociationSet>
+    <AssociationSet Name="FichierFichierType" Association="Model.Store.FichierFichierType">
+      <End Role="Fichier" EntitySet="FichierSet" />
+      <End Role="FichierType" EntitySet="FichierTypeSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategorieOffre" Association="Model.Store.CategorieOffre">
+      <End Role="Categorie" EntitySet="CategorieSet" />
+      <End Role="Offre" EntitySet="OffreSet" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurFichier" Association="Model.Store.UtilisateurFichier">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Fichier" EntitySet="FichierSet" />
+    </AssociationSet>
+    <AssociationSet Name="DiscussionOffre" Association="Model.Store.DiscussionOffre">
+      <End Role="Discussion" EntitySet="DiscussionSet" />
+      <End Role="Offre" EntitySet="OffreSet" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurDiscussion" Association="Model.Store.UtilisateurDiscussion">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Discussion" EntitySet="DiscussionSet" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurNotifications" Association="Model.Store.UtilisateurNotifications">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Notifications" EntitySet="NotificationSet" />
+    </AssociationSet>
+    <AssociationSet Name="OffreNotifications" Association="Model.Store.OffreNotifications">
+      <End Role="Offre" EntitySet="OffreSet" />
+      <End Role="Notifications" EntitySet="NotificationSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UtilisateurSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prenom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateNaissance" Type="datetime" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OffreSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UtilisateurId" Type="int" Nullable="false" />
+    <Property Name="Titre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="true" />
+    <Property Name="Longitude" Type="float" Nullable="true" />
+    <Property Name="CategorieId" Type="int" Nullable="false" />
+    <Property Name="CodePostal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ville" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EstArchivee" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="CategorieSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="FichierSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OffreId" Type="int" Nullable="true" />
+    <Property Name="FichierTypeId" Type="int" Nullable="false" />
+    <Property Name="Chemin" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Titre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="contentType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UtilisateurFichier_Fichier_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="FichierTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiscussionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OffreId" Type="int" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UtilisateurId" Type="int" Nullable="false" />
+    <Property Name="DateMsg" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotificationSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UtilisateurId" Type="int" Nullable="false" />
+    <Property Name="OffreId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="EstAccepte" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <Association Name="UtilisateurOffre">
+    <End Role="Utilisateur" Type="Model.Store.UtilisateurSet" Multiplicity="1" />
+    <End Role="Offre" Type="Model.Store.OffreSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offre">
+        <PropertyRef Name="UtilisateurId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OffreFichier">
+    <End Role="Offre" Type="Model.Store.OffreSet" Multiplicity="0..1" />
+    <End Role="Fichier" Type="Model.Store.FichierSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fichier">
+        <PropertyRef Name="OffreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategorieCategorie">
+    <End Role="Categorie" Type="Model.Store.CategorieSet" Multiplicity="0..1" />
+    <End Role="Categorie1" Type="Model.Store.CategorieSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Categorie1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FichierFichierType">
+    <End Role="Fichier" Type="Model.Store.FichierSet" Multiplicity="*" />
+    <End Role="FichierType" Type="Model.Store.FichierTypeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="FichierType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fichier">
+        <PropertyRef Name="FichierTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategorieOffre">
+    <End Role="Categorie" Type="Model.Store.CategorieSet" Multiplicity="1" />
+    <End Role="Offre" Type="Model.Store.OffreSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offre">
+        <PropertyRef Name="CategorieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurFichier">
+    <End Role="Utilisateur" Type="Model.Store.UtilisateurSet" Multiplicity="0..1" />
+    <End Role="Fichier" Type="Model.Store.FichierSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fichier">
+        <PropertyRef Name="UtilisateurFichier_Fichier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DiscussionOffre">
+    <End Role="Discussion" Type="Model.Store.DiscussionSet" Multiplicity="*" />
+    <End Role="Offre" Type="Model.Store.OffreSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Offre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Discussion">
+        <PropertyRef Name="OffreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurDiscussion">
+    <End Role="Utilisateur" Type="Model.Store.UtilisateurSet" Multiplicity="1" />
+    <End Role="Discussion" Type="Model.Store.DiscussionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Discussion">
+        <PropertyRef Name="UtilisateurId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurNotifications">
+    <End Role="Utilisateur" Type="Model.Store.UtilisateurSet" Multiplicity="1" />
+    <End Role="Notifications" Type="Model.Store.NotificationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UtilisateurId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OffreNotifications">
+    <End Role="Offre" Type="Model.Store.OffreSet" Multiplicity="1" />
+    <End Role="Notifications" Type="Model.Store.NotificationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="OffreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UtilisateurSet" EntityType="Model.Utilisateur" />
+          <EntitySet Name="OffreSet" EntityType="Model.Offre" />
+          <AssociationSet Name="UtilisateurOffre" Association="Model.UtilisateurOffre">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Offre" EntitySet="OffreSet" />
+          </AssociationSet>
+          <EntitySet Name="CategorieSet" EntityType="Model.Categorie" />
+          <EntitySet Name="FichierSet" EntityType="Model.Fichier" />
+          <AssociationSet Name="OffreFichier" Association="Model.OffreFichier">
+            <End EntitySet="OffreSet" Role="Offre" />
+            <End EntitySet="FichierSet" Role="Fichier" />
+          </AssociationSet>
+          <AssociationSet Name="CategorieCategorie" Association="Model.CategorieCategorie">
+            <End Role="Categorie" EntitySet="CategorieSet" />
+            <End Role="Categorie1" EntitySet="CategorieSet" />
+          </AssociationSet>
+          <EntitySet Name="FichierTypeSet" EntityType="Model.FichierType" />
+          <AssociationSet Name="FichierFichierType" Association="Model.FichierFichierType">
+            <End Role="Fichier" EntitySet="FichierSet" />
+            <End Role="FichierType" EntitySet="FichierTypeSet" />
+          </AssociationSet>
+          <AssociationSet Name="CategorieOffre" Association="Model.CategorieOffre">
+            <End Role="Categorie" EntitySet="CategorieSet" />
+            <End Role="Offre" EntitySet="OffreSet" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurFichier" Association="Model.UtilisateurFichier">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Fichier" EntitySet="FichierSet" />
+          </AssociationSet>
+          <EntitySet Name="DiscussionSet" EntityType="Model.Discussion" />
+          <AssociationSet Name="DiscussionOffre" Association="Model.DiscussionOffre">
+            <End Role="Discussion" EntitySet="DiscussionSet" />
+            <End Role="Offre" EntitySet="OffreSet" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurDiscussion" Association="Model.UtilisateurDiscussion">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Discussion" EntitySet="DiscussionSet" />
+          </AssociationSet>
+          <EntitySet Name="NotificationSet" EntityType="Model.Notification" />
+          <AssociationSet Name="UtilisateurNotifications" Association="Model.UtilisateurNotifications">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Notifications" EntitySet="NotificationSet" />
+          </AssociationSet>
+          <AssociationSet Name="OffreNotifications" Association="Model.OffreNotifications">
+            <End Role="Offre" EntitySet="OffreSet" />
+            <End Role="Notifications" EntitySet="NotificationSet" />
+          </AssociationSet>
+          <EntitySet Name="FavoriSet" EntityType="Model.Favori" />
+          <AssociationSet Name="UtilisateurFavori" Association="Model.UtilisateurFavori">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Favori" EntitySet="FavoriSet" />
+          </AssociationSet>
+          <AssociationSet Name="FavoriOffre" Association="Model.FavoriOffre">
+            <End Role="Favori" EntitySet="FavoriSet" />
+            <End Role="Offre" EntitySet="OffreSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Nom" Type="String" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" />
+          <Property Name="Prenom" Type="String" Nullable="false" />
+          <Property Name="DateNaissance" Type="DateTime" Nullable="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" />
+          <NavigationProperty Name="Fichier" Relationship="Model.UtilisateurFichier" FromRole="Utilisateur" ToRole="Fichier" />
+        </EntityType>
+        <EntityType Name="Offre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.UtilisateurOffre" FromRole="Offre" ToRole="Utilisateur" />
+          <Property Name="UtilisateurId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fichier" Relationship="Model.OffreFichier" FromRole="Offre" ToRole="Fichier" />
+          <Property Name="Titre" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="true" />
+          <Property Name="Longitude" Type="Double" Nullable="true" />
+          <NavigationProperty Name="Categorie" Relationship="Model.CategorieOffre" FromRole="Offre" ToRole="Categorie" />
+          <Property Name="CategorieId" Type="Int32" Nullable="false" />
+          <Property Name="CodePostal" Type="String" Nullable="false" />
+          <Property Name="Ville" Type="String" Nullable="false" />
+          <NavigationProperty Name="Discussion" Relationship="Model.DiscussionOffre" FromRole="Offre" ToRole="Discussion" />
+          <NavigationProperty Name="Notifications" Relationship="Model.OffreNotifications" FromRole="Offre" ToRole="Notifications" />
+          <Property Name="EstArchivee" Type="Boolean" Nullable="false" DefaultValue="False" annotation:StoreGeneratedPattern="None" />
+        </EntityType>
+        <Association Name="UtilisateurOffre">
+          <End Type="Model.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="Model.Offre" Role="Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="UtilisateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Nom" Type="String" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Fichier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OffreId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="FichierType" Relationship="Model.FichierFichierType" FromRole="Fichier" ToRole="FichierType" />
+          <Property Name="FichierTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Chemin" Type="String" Nullable="false" />
+          <Property Name="Titre" Type="String" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" />
+          <Property Name="contentType" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="OffreFichier">
+          <End Type="Model.Offre" Multiplicity="0..1" Role="Offre" />
+          <End Type="Model.Fichier" Multiplicity="*" Role="Fichier" />
+          <ReferentialConstraint>
+            <Principal Role="Offre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fichier">
+              <PropertyRef Name="OffreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategorieCategorie">
+          <End Type="Model.Categorie" Role="Categorie" Multiplicity="0..1" />
+          <End Type="Model.Categorie" Role="Categorie1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categorie1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FichierType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Nom" Type="String" Nullable="false" cg:SetterAccess="Public" />
+        </EntityType>
+        <Association Name="FichierFichierType">
+          <End Type="Model.Fichier" Role="Fichier" Multiplicity="*" />
+          <End Type="Model.FichierType" Role="FichierType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="FichierType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fichier">
+              <PropertyRef Name="FichierTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategorieOffre">
+          <End Type="Model.Categorie" Role="Categorie" Multiplicity="1" />
+          <End Type="Model.Offre" Role="Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offre">
+              <PropertyRef Name="CategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurFichier">
+          <End Type="Model.Utilisateur" Role="Utilisateur" Multiplicity="0..1" />
+          <End Type="Model.Fichier" Role="Fichier" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="Discussion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OffreId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.UtilisateurDiscussion" FromRole="Discussion" ToRole="Utilisateur" />
+          <Property Name="UtilisateurId" Type="Int32" Nullable="false" />
+          <Property Name="DateMsg" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="DiscussionOffre">
+          <End Type="Model.Discussion" Role="Discussion" Multiplicity="*" />
+          <End Type="Model.Offre" Role="Offre" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Offre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Discussion">
+              <PropertyRef Name="OffreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurDiscussion">
+          <End Type="Model.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="Model.Discussion" Role="Discussion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Discussion">
+              <PropertyRef Name="UtilisateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.UtilisateurNotifications" FromRole="Notifications" ToRole="Utilisateur" />
+          <Property Name="UtilisateurId" Type="Int32" Nullable="false" />
+          <Property Name="OffreId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="EstAccepte" Type="Boolean" Nullable="false" DefaultValue="false" />
+        </EntityType>
+        <Association Name="UtilisateurNotifications">
+          <End Type="Model.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="Model.Notification" Role="Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UtilisateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OffreNotifications">
+          <End Type="Model.Offre" Role="Offre" Multiplicity="1" />
+          <End Type="Model.Notification" Role="Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="OffreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Favori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UtilisateurId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Offre" Relationship="Model.FavoriOffre" FromRole="Favori" ToRole="Offre" />
+          <Property Name="OffreId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UtilisateurFavori">
+          <End Type="Model.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="Model.Favori" Role="Favori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favori">
+              <PropertyRef Name="UtilisateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoriOffre">
+          <End Type="Model.Favori" Role="Favori" Multiplicity="*" />
+          <End Type="Model.Offre" Role="Offre" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Offre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favori">
+              <PropertyRef Name="OffreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="UtilisateurSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Utilisateur)">
+        <MappingFragment StoreEntitySet="UtilisateurSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="DateNaissance" ColumnName="DateNaissance" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OffreSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Offre)">
+        <MappingFragment StoreEntitySet="OffreSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UtilisateurId" ColumnName="UtilisateurId" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="CategorieId" ColumnName="CategorieId" />
+          <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
+          <ScalarProperty Name="EstArchivee" ColumnName="EstArchivee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategorieSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Categorie)">
+        <MappingFragment StoreEntitySet="CategorieSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FichierSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Fichier)">
+        <MappingFragment StoreEntitySet="FichierSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OffreId" ColumnName="OffreId" />
+          <ScalarProperty Name="FichierTypeId" ColumnName="FichierTypeId" />
+          <ScalarProperty Name="Chemin" ColumnName="Chemin" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="contentType" ColumnName="contentType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FichierTypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FichierType)">
+        <MappingFragment StoreEntitySet="FichierTypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiscussionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Discussion)">
+        <MappingFragment StoreEntitySet="DiscussionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OffreId" ColumnName="OffreId" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="UtilisateurId" ColumnName="UtilisateurId" />
+          <ScalarProperty Name="DateMsg" ColumnName="DateMsg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Notification)">
+        <MappingFragment StoreEntitySet="NotificationSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UtilisateurId" ColumnName="UtilisateurId" />
+          <ScalarProperty Name="OffreId" ColumnName="OffreId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="EstAccepte" ColumnName="EstAccepte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UtilisateurFichier" TypeName="Model.UtilisateurFichier" StoreEntitySet="FichierSet">
+      <EndProperty Name="Utilisateur">
+        <ScalarProperty Name="Id" ColumnName="UtilisateurFichier_Fichier_Id" />
+      </EndProperty>
+      <EndProperty Name="Fichier">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="UtilisateurFichier_Fichier_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

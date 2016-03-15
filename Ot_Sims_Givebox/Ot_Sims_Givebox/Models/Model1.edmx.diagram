@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e48f52b7c974695bf606ef7193c9d27" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model.Utilisateur" Width="1.5" PointX="6" PointY="0.625" />
+        <EntityTypeShape EntityType="Model.Offre" Width="1.5" PointX="3.375" PointY="1.75" />
+        <AssociationConnector Association="Model.UtilisateurOffre" />
+        <EntityTypeShape EntityType="Model.Categorie" Width="1.5" PointX="7.625" PointY="2.75" />
+        <EntityTypeShape EntityType="Model.Fichier" Width="1.5" PointX="5.375" PointY="3.875" />
+        <AssociationConnector Association="Model.OffreFichier" />
+        <AssociationConnector Association="Model.CategorieCategorie" />
+        <EntityTypeShape EntityType="Model.FichierType" Width="1.5" PointX="8.25" PointY="4.875" />
+        <AssociationConnector Association="Model.FichierFichierType" />
+        <AssociationConnector Association="Model.CategorieOffre" />
+        <AssociationConnector Association="Model.UtilisateurFichier" />
+        <EntityTypeShape EntityType="Model.Discussion" Width="1.5" PointX="1" PointY="1.875" />
+        <AssociationConnector Association="Model.DiscussionOffre" />
+        <AssociationConnector Association="Model.UtilisateurDiscussion" />
+        <EntityTypeShape EntityType="Model.Favori" Width="1.5" PointX="9.25" PointY="0.625" />
+        <AssociationConnector Association="Model.UtilisateurFavori" />
+        <AssociationConnector Association="Model.OffreFavori" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
